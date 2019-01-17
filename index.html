@@ -1,0 +1,125 @@
+<!DOCTYPE html> <!-- this declarartion defines the document to be HTML5 -->
+<html lang-"en-US"> <!-- this element is the root element of an HTML page  -->
+<head> <!-- this element contains meta information about the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="styles.css">
+<title>Main</title> <!-- this element specifies a title for the document (appears at top of browser)  -->
+</head>
+<body id="home-background"> 
+    
+ <div id="container"></div>
+    <script src="js/three.min.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+        varying vec2 vUv; 
+        void main()
+        {
+            vUv = uv;
+
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0 );
+            gl_Position = projectionMatrix * mvPosition;
+        }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        
+        uniform float iGlobalTime;
+        uniform sampler2D iChannel0;
+        uniform sampler2D iChannel1;
+
+        varying vec2 vUv;
+
+
+      
+void main(void)
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = -1.0 + 2.0 *vUv;
+    uv.x += sin(iTime*0.5 +  uv.y*10.) * 0.05;
+    uv.y += cos(iTime*0.5 +  uv.x*10.) * 0.05;
+                
+    // Time varying pixel color
+    vec3 col = texture(iChannel1, uv).rgb;
+    
+//    col.b = col.b - iMouse.x *0.001 ;
+//    col.r = col.r - col.r;
+//    col.g = col.g - col.g;
+//  
+//    col = sin(col + length(col)*30.0 + iMouse.y * 0.001) * 0.5 + 0.5;
+
+    col = col - 0.25;
+    
+    // Output to screen
+    gl_fragColor = vec4(col,1.0);
+}
+    </script>
+   
+    
+    
+    <!--this element contains visible page content -->
+    
+<!--    <iframe id="home-shader" width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/4dyBDd?gui=false&t=10&paused=false&muted=true&controls=false" allowfullscreen></iframe>-->
+    
+    <iframe id="home-shader" allowtransparence="true" width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/4dyBDd?gui=false&t=10&paused=false&muted=true" frameborder="0" style="overflow:hidden;height:100%;width:100%;z-index:-1;" height="100%" width="100%"></iframe>
+
+<!--<img id="main-img" src="MAINIMG3_mobile.png">-->
+    
+<!--
+    <picture>
+  <source media="(min-width: 600px)" srcset="MAINIMG3.png">
+  <source media="(max-width: 559px)" srcset="">
+  <img id="main-img" src="" alt="Flowers" style="width:auto;">
+</picture>
+-->
+    
+    
+
+ <!-- defines large heading -->
+    <p id="name">Heather Mitchell</p><br><br>
+<p>
+    <a href="work.html">Work</a><br><br>
+    <a href="info.html">Info</a><br><br>
+    <a href="contact.html">Contact</a><br><br>
+    <a href="links.html">Links</a><br><br>
+
+    </p> <!-- defines a paragraph -->
+
+</body>
+    
+    <!-- ideas for the main page: everytime new page changes image
+all black with blue text
+interactive webgl thing
+the income iequality elephant following mouse
+
+
+blue image in background
+changes depend on mouse position
+filter on image
+that changes every time?
+blue black filter
+
+forest at home
+with pic from office overtop
+or just pic of forest tbh
+maybe people
+or cars!!!
+meat cars and filter
+meat filter
+flesh cars
+
+get that done
+add new work about stocl market
+post?
+
+add fun door
+but only leads to under construction
+still have password?
+
+add poetry or essay in comments of html doc
+
+fake document
+charts?
+screaming image
+interactive
+kitten mouse
+crawls web and uses images/text-->
+</html>
